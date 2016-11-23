@@ -1,4 +1,4 @@
-package REST;
+package rest;
 
 import java.util.Set;
 import javax.ws.rs.core.Application;
@@ -27,7 +27,7 @@ public class ApplicationConfig extends Application
      */
     private void addRestResourceClasses(Set<Class<?>> resources)
     {
-        resources.add(REST.GenericResource.class);
+        resources.add(rest.GenericResource.class);
     }
     
 }

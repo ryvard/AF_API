@@ -14,37 +14,36 @@ import static org.junit.Assert.*;
 import io.restassured.RestAssured;
 import static io.restassured.RestAssured.*;
 import io.restassured.parsing.Parser;
+import java.net.MalformedURLException;
+import javax.servlet.ServletException;
+import org.apache.catalina.LifecycleException;
 import static org.hamcrest.Matchers.*;
 import test.utils.EmbeddedTomcat;
 
+
 /**
  *
- * @author Jmach
+ * @author miaryvard
  */
 public class GenericResourceTest
 {
     private static EmbeddedTomcat tomcat;
-   
     
     public GenericResourceTest()
     {
     }
     
     @BeforeClass
-    public static void setUpClass()
+    public static void setUpClass() throws ServletException, MalformedURLException, LifecycleException
     {
         tomcat = new EmbeddedTomcat();
-        tomcat.start(9999, "/flights");
-        
-        RestAssured.baseURI="http://localhost";
-        RestAssured.port=9999;
-        RestAssured.basePath="/flights";
-        RestAssured.defaultParser=Parser.JSON;
+        tomcat.start(9999,"/flights");
     }
     
     @AfterClass
     public static void tearDownClass()
     {
+        tomcat.stop();
     }
     
     @Before
@@ -57,12 +56,17 @@ public class GenericResourceTest
     {
     }
 
+    @Test
+    public void serverIsRunningPort9999()
+    {
+        given().
+                when().get().
+                then().
+                statusCode(200);
+    }
     /**
      * Test of getTEST method, of class GenericResource.
      */
-    
-    
-    
 //    @Test
 //    public void testGetTEST()
 //    {
@@ -92,5 +96,5 @@ public class GenericResourceTest
 //        // TODO review the generated test code and remove the default call to fail.
 //        fail("The test case is a prototype.");
 //    }
-//    
+    
 }
