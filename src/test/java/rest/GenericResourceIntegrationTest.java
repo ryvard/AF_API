@@ -1,19 +1,9 @@
 package rest;
 
+import static io.restassured.RestAssured.given;
 import rest.GenericResource;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
-import io.restassured.RestAssured;
-import static io.restassured.RestAssured.*;
-import io.restassured.parsing.Parser;
-import java.net.MalformedURLException;
-
-import static org.hamcrest.Matchers.*;
-//import test.utils.EmbeddedTomcat;
 
 /**
  *
@@ -50,6 +40,14 @@ public class GenericResourceIntegrationTest
     {
     }
 
+    @Test
+    public void serverIsRunning()
+    {
+        given().
+                when().get("http://localhost:8084/AF_API").
+                then().
+                statusCode(200);
+    }
    
     /**
      * Test of getTEST method, of class GenericResource.
@@ -63,5 +61,7 @@ public class GenericResourceIntegrationTest
         String result = instance.getTEST();
         assertEquals(expResult, result);
     }
+    
+    
 
 }
