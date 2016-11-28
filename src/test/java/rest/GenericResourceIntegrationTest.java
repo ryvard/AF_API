@@ -20,14 +20,11 @@ public class GenericResourceIntegrationTest
     @BeforeClass
     public static void setUpClass()
     {
-//        tomcat = new EmbeddedTomcat();
-//        tomcat.start(9999,"/flights");
     }
 
     @AfterClass
     public static void tearDownClass()
     {
-//        tomcat.stop();
     }
 
     @Before
@@ -44,7 +41,7 @@ public class GenericResourceIntegrationTest
     public void serverIsRunning()
     {
         given().
-                when().get("http://localhost:8084/AF_API").
+                when().get("http://localhost:8080/AF_API").
                 then().
                 statusCode(200);
     }
